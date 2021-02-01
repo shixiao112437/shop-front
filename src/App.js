@@ -1,15 +1,24 @@
 import React from 'react'
-import { Button} from 'antd-mobile';
+import {Route,BrowserRouter,Redirect} from 'react-router-dom'
+import Home from './pages/Home/home'
+import Login from './pages/Login/login'
+import Rigister from './pages/Rigister/rigister'
+
+
 export default function App() {
   return (
-    <div>
-       <h1>
-         react项目初始化
-         <Button type="primary">
-           primary disabled
-         </Button>
-       </h1>
-    </div>
+    <>
+    <BrowserRouter>
+
+      <Route exact path='/' render={props =>　{
+        (<Redirect to='/home/'></Redirect>)
+      }} ></Route>  
+       <Route path="/home" component={Home}></Route>
+      <Route exact path='/rigister' component={Rigister}></Route>
+      <Route exact path='/login' component={Login}></Route>
+
+    </BrowserRouter>
+    </>
   )
 }
 
