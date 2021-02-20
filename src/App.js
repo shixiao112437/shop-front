@@ -11,7 +11,7 @@ export default function App() {
     <BrowserRouter>
 
       <Route exact path='/' render={props =>　{
-        (<Redirect to='/home/'></Redirect>)
+        return <Redirect to='/home'></Redirect>
       }} ></Route>  
        <Route path="/home" component={Home}></Route>
       <Route exact path='/rigister' component={Rigister}></Route>
