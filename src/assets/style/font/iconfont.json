@@ -1,0 +1,72 @@
+{
+  "id": "2383218",
+  "name": "shop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14402843",
+      "name": "Augusta20演唱会信息",
+      "font_class": "Augusta20yanchanghuixinxi",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "19515696",
+      "name": "更  多",
+      "font_class": "gengduo",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "19614525",
+      "name": "下 载",
+      "font_class": "xiazai",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "6446134",
+      "name": "收 藏",
+      "font_class": "shoucang",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "8723721",
+      "name": "评 论",
+      "font_class": "wsdzb_zzgzt_zzsh_mzpy_dymzpyjl",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "20004733",
+      "name": "下一首",
+      "font_class": "xiayishou-copy",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "6160944",
+      "name": "播放-暂停",
+      "font_class": "bofang-zanting",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "11347320",
+      "name": "下一首",
+      "font_class": "xiayishou",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "17026063",
+      "name": "播放暂停",
+      "font_class": "bofangzanting",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import api from '../../api/index';
 import './idnex.scss'
 
-function PageIndex() {
+function PageIndex(props) {
     const listBox = useRef()
    const [city, setCity] = useState({})
    const [currentIndex, setCurrentIndex] = useState(0)
@@ -40,6 +40,14 @@ function PageIndex() {
    function jumpRender (index){
         console.log(index,'1111111');
         listBox.current.scrollToRow(index)
+   }
+   function jump (city) {
+       props.history.push({
+           pathname:"/home/map",
+           state:{
+               city
+           }
+       })
    }
    useEffect(()=>{
         getCityList()
@@ -77,7 +85,9 @@ function PageIndex() {
                                     </h1>
                                     { city[letter].map(item => {                                     
                                         return (
-                                            <div className={'cityone'} key={item.value} >
+                                            <div onClick={() => {
+                                                jump(item.label)
+                                            }} className={'cityone'} key={item.value} >
                                                 {item.label}
                                             </div>
                                         )
