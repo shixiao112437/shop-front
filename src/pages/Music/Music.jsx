@@ -4,12 +4,8 @@ import style from './index.module.scss'
 import './index.scss'
 import MyNavBar from '../../component/MyNavBar/myNavBar'
 import { Slider } from 'antd-mobile';
+import { object } from 'prop-types'
 const lrc = `
-[ti:骨子里的我]
-[ar:李代沫]
-[al:敏感者]
-[by:]
-[offset:0]
 [00:00.00]骨子里的我 - 李代沫 (Demon Li)
 [00:04.46]词：易家扬
 [00:08.93]曲：Michael Willaim
@@ -60,10 +56,26 @@ const lrc = `
 [02:54.32]
 [02:55.76]我不想飞 宁可用脚去追 去流浪
 `
-var lrcArr =lrc.split("/")
+var lrcArr =lrc.split(`
+`)
 
-console.log(lrcArr,'歌词歌词歌词歌词歌词')
+// console.log(lrcArr,'歌词歌词歌词歌词歌词')
+const regTime = /\[\d{2}:\d{2}.\d{2,3}\]/ // 
+const arr =[]
+lrcArr.forEach(item => {
+    if(item =='') return
+    const key = item.match(regTime)&&item.match(regTime)[0]
+    const lrc = key&&item.substring(key.length)
+   let key1 = key&&key.substring(1,key.length-1)
+    arr.push({
+        [key1]:lrc,
+        current:false
+    })
+        
+})
+// console.log(arr,'sslfdjlfjasldjfl');
 function Music() {
+  
     // 时间格式化处理
     const getTime = time => {
         if (time) {
@@ -82,23 +94,43 @@ function Music() {
             return "00:00";
         }
     };
+    // 时间格式转换成ms
+    const formatTimeToMs = time => {
+ 
+        var min = time.split(":")[0]
+        var sec = time.split(":")[1]
+        var s = Number(min * 60) + Number(sec)
+        return s
+    }
 
     const audio = useRef()
     const [value, setValue] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false) // 是否在播放
     const [currentTime, setCurrentTime] = useState("0:00")
     const [totalTime, setTotalTime] = useState("0:00")
+    const [lrcArray, setLrcArray] = useState(arr)
     const url = "http://127.0.0.1:7001/public/music/%E9%AA%A8%E5%AD%90%E9%87%8C%E7%9A%84%E6%88%91.MP3"
-
+   
+    // 渲染歌词
+    function renderLysrc(){
+        return lrcArray.map(item =>{
+            let key = Object.keys(item)[0]
+            return (
+                <li key={key} className={item.current?style.active:""}>
+                    {item[key]}
+                </li>
+            )
+        })
+    }
     // 获取歌曲的总时长
     function getTotalTime() {
-        console.log(audio, 'audio');
+        // console.log(audio, 'audio');
         let totalTime = getTime(audio.current.duration)
         setTotalTime(totalTime)
     }
 
     function onPlay(e) {
-        console.log(e, '111');
+        // console.log(e, '111');
         setIsPlaying(true)
         audio.current.play()
     }
@@ -111,11 +143,31 @@ function Music() {
         audio.current.currentTime = currentTime
     }
     useEffect(() => {
+        // console.log(audio,'12312');
         audio.current.addEventListener("timeupdate", () => {
-            let currentTime = audio.current.currentTime
-            console.log(currentTime, '1');
+            let currentTime = audio.current.currentTime // 当前播放的音乐时间
+            // 歌词
+            // debugger
+         let res =    arr.map(item => {
+             const time = Object.keys(item)[0]
+             console.log(`歌词时间:${formatTimeToMs(time)}
+             当前时间:${currentTime}`)
+             return {
+                 ...item,
+                 current:formatTimeToMs(time)<=currentTime
+             }
+            })
+            arr.forEach(item => {
+             const time = Object.keys(item)[0]
+                if(formatTimeToMs(time)<=currentTime){
+                    arr.forEach(item1 => item1.current = false)
+                    item.current = true
+                }
+            })
+            setLrcArray(arr)
+
             setCurrentTime(getTime(currentTime))
-            console.log(currentTime / audio.current.duration * 100);
+            // console.log(currentTime / audio.current.duration * 100);
             setValue(currentTime / audio.current.duration * 100)
         })
 
@@ -147,36 +199,7 @@ function Music() {
                 </div>
                 {/* 歌词 */}
                 <ul className={style.lyric}>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
-                    <li>123123123</li>
+                {renderLysrc()}
                 </ul>
 
                <br/>
