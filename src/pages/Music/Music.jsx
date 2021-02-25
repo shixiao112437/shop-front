@@ -60,8 +60,9 @@ const lrc = `
 [02:54.32]
 [02:55.76]我不想飞 宁可用脚去追 去流浪
 `
-var lrcArr =(lrc.split(":")[0] * 60 + parseFloat(lrc.split(":")[1])).toFixed(3)
-console.log(lrcArr,'歌词歌词歌词歌词歌词');
+var lrcArr =lrc.split("/")
+
+console.log(lrcArr,'歌词歌词歌词歌词歌词')
 function Music() {
     // 时间格式化处理
     const getTime = time => {
