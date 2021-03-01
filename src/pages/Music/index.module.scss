@@ -41,20 +41,27 @@
             animation: Anim 2s linear 1s infinite
         }
     }
-    .lyric{
-        margin-top: 20px;
-        // height: 600px;
-        // background-color: #fff;
-        border: 1px solid #fff;
+    .lyricWrap{
         height: 300px;
-        overflow: scroll;
-        li{
-            padding: 5px;
-             font-size: 12px;
-        }
-        .active{
-            font-size: 14px;
-            font-weight: 900;
+        overflow: auto;
+        margin: 20PX 0;
+        padding-top: 30px;
+        .lyric{
+            background-color: rgba(95, 81, 81,.1);
+            // border: 1px solid #fff;
+            // height: 300px;
+            padding-bottom: 200px ;
+            li{
+                padding: 5px;
+                font-size: 13px;
+                box-sizing: border-box;
+                height: 24px;
+            }
+            .active{
+                font-size: 15px;
+                font-weight: 900;
+                color: red;
+            }
         }
     }
     .opration{
@@ -72,6 +79,7 @@
         justify-content: space-between;
         color:#fff;
         font-size: 12px;
+        margin: 30px 0;
         .startTime{
             flex: 0 0 70px;
             text-align: right;

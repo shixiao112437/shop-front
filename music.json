@@ -1,0 +1,16 @@
+[{
+    "name":"骨子里的我",
+    "path":"http://127.0.0.1:7001/public/music/%E9%AA%A8%E5%AD%90%E9%87%8C%E7%9A%84%E6%88%91.MP3",
+    "lrcPath":"",
+    "picture":""
+},{
+    "name":"给我一首歌的时间",
+    "path":"http://127.0.0.1:7001/public/music/%E7%BB%99%E6%88%91%E4%B8%80%E9%A6%96%E6%AD%8C%E7%9A%84%E6%97%B6%E9%97%B4.MP3",
+    "lrcPath":"",
+    "picture":""
+},{
+    "name":"简单爱",
+    "path":"http://127.0.0.1:7001/public/music/%E7%AE%80%E5%8D%95%E7%88%B1.MP3",
+    "lrcPath":"",
+    "picture":""
+},]

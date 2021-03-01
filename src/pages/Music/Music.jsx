@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import style from './index.module.scss'
 import './index.scss'
 import MyNavBar from '../../component/MyNavBar/myNavBar'
 import { Slider } from 'antd-mobile';
-import { object } from 'prop-types'
+// import { object } from 'prop-types'
+import {debounce} from '../../utils/other'
+import {connect} from 'react-redux';
 const lrc = `
 [00:00.00]骨子里的我 - 李代沫 (Demon Li)
 [00:04.46]词：易家扬
@@ -63,7 +65,7 @@ var lrcArr =lrc.split(`
 const regTime = /\[\d{2}:\d{2}.\d{2,3}\]/ // 
 const arr =[]
 lrcArr.forEach(item => {
-    if(item =='') return
+    if(item ==='') return
     const key = item.match(regTime)&&item.match(regTime)[0]
     const lrc = key&&item.substring(key.length)
    let key1 = key&&key.substring(1,key.length-1)
@@ -74,7 +76,7 @@ lrcArr.forEach(item => {
         
 })
 // console.log(arr,'sslfdjlfjasldjfl');
-function Music() {
+function Music(props) {
   
     // 时间格式化处理
     const getTime = time => {
@@ -104,13 +106,20 @@ function Music() {
     }
 
     const audio = useRef()
+    const lyricScroll = useRef()
     const [value, setValue] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false) // 是否在播放
     const [currentTime, setCurrentTime] = useState("0:00")
     const [totalTime, setTotalTime] = useState("0:00")
     const [lrcArray, setLrcArray] = useState(arr)
+    const [musicid, seTmusicId] = useState(props.currentId)
+
     const url = "http://127.0.0.1:7001/public/music/%E9%AA%A8%E5%AD%90%E9%87%8C%E7%9A%84%E6%88%91.MP3"
-   
+  
+ 
+
+ 
+
     // 渲染歌词
     function renderLysrc(){
         return lrcArray.map(item =>{
@@ -128,45 +137,58 @@ function Music() {
         let totalTime = getTime(audio.current.duration)
         setTotalTime(totalTime)
     }
-
+    // 播放事件
     function onPlay(e) {
         // console.log(e, '111');
-        setIsPlaying(true)
-        audio.current.play()
+        setIsPlaying(true) // 控制播放图标
+        audio.current.play() // 播放事件
     }
+    // 暂停事件
     function onPause() {
         setIsPlaying(false)
         audio.current.pause()
     };
+    // 进度条
     const setProgress = (value) => {
         const currentTime = audio.current.duration * value / 100
         audio.current.currentTime = currentTime
     }
+
+    //  歌词滚动实现改变歌曲时间
+    const lyricToProgress = (e) => {
+        console.log('歌词滚动了',e)
+    }
+    // 防抖处理
+    let _lyricToProgress = debounce(lyricToProgress,1000)
+
+    
     useEffect(() => {
-        // console.log(audio,'12312');
+      
+        //  监听歌曲播放事件
         audio.current.addEventListener("timeupdate", () => {
             let currentTime = audio.current.currentTime // 当前播放的音乐时间
             // 歌词
             // debugger
-         let res =    arr.map(item => {
+       /*   let res = arr.map(item => {
              const time = Object.keys(item)[0]
-             console.log(`歌词时间:${formatTimeToMs(time)}
-             当前时间:${currentTime}`)
+            //  console.log(`歌词时间:${formatTimeToMs(time)}
+            //  当前时间:${currentTime}`)
              return {
                  ...item,
                  current:formatTimeToMs(time)<=currentTime
              }
-            })
-            arr.forEach(item => {
+            }) */
+            arr.forEach((item,index) => {
              const time = Object.keys(item)[0]
                 if(formatTimeToMs(time)<=currentTime){
-                    arr.forEach(item1 => item1.current = false)
-                    item.current = true
+                    arr.forEach(item1 => item1.current = false) // 排他
+                    item.current = true // 实现歌词高亮
+                    lyricScroll.current.scrollTop = index*20 // 实现歌词滚动
                 }
             })
             setLrcArray(arr)
 
-            setCurrentTime(getTime(currentTime))
+            setCurrentTime(getTime(currentTime)) // 设置进度条前面的时间
             // console.log(currentTime / audio.current.duration * 100);
             setValue(currentTime / audio.current.duration * 100)
         })
@@ -198,22 +220,26 @@ function Music() {
                     </span>
                 </div>
                 {/* 歌词 */}
-                <ul className={style.lyric}>
-                {renderLysrc()}
-                </ul>
-
-               <br/>
-               <br/>
+                <div onScroll={(e) => {
+                   _lyricToProgress(e)
+                }} ref={lyricScroll} className={style.lyricWrap}>
+                    <ul className={style.lyric}>
+                    {renderLysrc()}
+                    </ul>
+                </div>
+           
                 {/* 用户操作按钮 */}
                 <div className={style.opration}>
-                    <span className='iconfont icon-shoucang'></span>
+                    <span onClick={()=>{
+                         console.log(lyricScroll.current.scrollTop,'12312');
+                    }} className='iconfont icon-shoucang'></span>
                     <span className='iconfont icon-xiazai'></span>
                     <span className='iconfont icon-Augusta20yanchanghuixinxi'></span>
                     <span className='iconfont icon-wsdzb_zzgzt_zzsh_mzpy_dymzpyjl'></span>
-                    <span className='iconfont icon-gengduo'></span>
+                    <span onClick={() => {
+                        console.log(props)
+                    }} className='iconfont icon-gengduo'></span>
                 </div>
-                <br />
-                <br />
                 <div className={style.progress}>
                     <div className={style.startTime}>
                         {currentTime}
@@ -264,7 +290,7 @@ function Music() {
 
                         : <span onClick={onPlay} className="iconfont icon-bofangzanting"></span>
                     }
-                    <span className="iconfont icon-xiayishou">
+                    <span  className="iconfont icon-xiayishou">
 
                     </span>
                 </div>
@@ -282,5 +308,26 @@ function Music() {
         </>
     )
 }
-
-export default Music
+const mapState = (state) => {
+    return {
+        currentId:state.currentId,
+        musicList:state.musicList,
+    }
+}
+const mapDispatch =(dispatch) => {
+    return {
+        nextM:(value) => {
+            dispatch({
+                type:'nextMusic',
+                value
+            })
+        },
+        beforeM:(value) => {
+            dispatch({
+                type:'beforeMusic',
+                value
+            })
+        }
+    }
+}
+export default connect(mapState,mapDispatch)(Music)
