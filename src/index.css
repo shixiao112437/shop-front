@@ -40,3 +40,7 @@ ul {
   padding: 0;
   list-style: none;
 }
+
+.am-tab-bar{
+  height: 50px;
+}

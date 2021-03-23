@@ -1,0 +1,13 @@
+$clolor: #11cee7;
+.contain{
+    height: 100vh;
+    width: 100%;
+    .route{
+        height: calc(100vh - 50px);
+    }
+    .tarbar{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+}

@@ -21,7 +21,7 @@ function MuciList(props) {
   
     }, [])
 
-    
+
     const renderList = () => {
         return (
             props.musicList.map((item,index) => (
@@ -68,7 +68,7 @@ function MuciList(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        musicList: state.musicList
+        musicList: state.reduce.musicList
     }
 }
 

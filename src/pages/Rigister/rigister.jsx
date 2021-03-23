@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState,useRef} from 'react'
 import { Toast, List, InputItem, WhiteSpace,Button,Checkbox } from 'antd-mobile';
 import rigister from './rigister.module.scss'
 import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import MyNavBar from '../../component/MyNavBar/myNavBar'
 import api from '../../api/index';
+import SlideCheck from '../../component/SlideCheck/index'
+
 const AgreeItem = Checkbox.AgreeItem;
 console.log(process.env.REACT_APP_URL,'aaaaaaaaaaaaaaaa');
 console.log(process.env.REACT_APP_URL,'bbbbbbbbbbbbbbbb');
 
 function Rigister() {
+  const [modal, setModal] = useState(false)
+  let formRef = useRef()
     const formik = {
         initialValues: {
             account: '',
@@ -23,11 +27,12 @@ function Rigister() {
         }),
         onSubmit: async values => {
             console.log(values, 'ssss')
+            alert(values)
             register(values)
         },
     }
     async function register(values) {
-        let res = await api.auth.rigister(values)
+        let res = await api.auth.rigister({...values})
         console.log(res,'ssssss');
         if (res) {
             Toast.success('注册成功', 1)
@@ -44,32 +49,41 @@ function Rigister() {
                 注册页面
             </MyNavBar>
             <WhiteSpace size="xl"></WhiteSpace>
-            <Formik
+            <Formik 
                 initialValues={formik.initialValues}
                 validationSchema={formik.validationSchema}
-                onSubmit={formik.onSubmit}>
-                <Form>
+              
+                >
+                <Form ref={formRef} onSubmit={formik.onSubmit}>
                     <label htmlFor="account">账号：</label>
-                    <Field name="account" type="text" />
-                    <ErrorMessage name="account" className={rigister.errorMsg}  >
+                    <Field className={rigister.input} name="account" type="text" />
+                   
+                    <ErrorMessage component='div'  name="account" className={rigister.errorMsg}  >
                     </ErrorMessage>
-                    <hr />
+              <br/>
                     <label htmlFor="password">密码：</label>
-                    <Field name="password" type="password" />
-                    <ErrorMessage name="password" className={rigister.errorMsg}  >
+                    <Field className={rigister.input} name="password" type="password" />
+                    <ErrorMessage component='div' name="password" className={rigister.errorMsg}  >
                     </ErrorMessage>
-                    <hr />
-                    <input type="checkbox" name="ischeck"/>请勾选协议
-                    <ErrorMessage name="ischeck" className={rigister.errorMsg}  >
+              <br/>
+                   <div className={rigister.check}>
+                   <Field name="ischeck" type="checkbox" />
+                    请仔细阅读天款协议
+                   </div>
+                    
+                    <ErrorMessage component='div' name="ischeck" className={rigister.errorMsg}  >
                     </ErrorMessage>
-                    <hr />
-                    <Button onClick={
-                        ()=>{
-                            formik.onSubmit()
-                        }
-                    } type="primary">注册</Button>
+                
+                    <Button type="primary" onClick={()=>{
+                     
+                        setModal(true)
+                        setTimeout(()=>{setModal(false)})
+                    }}>注册</Button>
                 </Form>
             </Formik>
+            <SlideCheck modal={modal} success={()=>{
+                formik.onSubmit()
+            }}></SlideCheck>
         </div>
     )
 }

@@ -8,7 +8,26 @@ import PageIndex from '../Index/PageIndex'
 import Mymap from '../Map/Mymap'
 import Music from '../Music/Music'
 console.log(Mydetail,'skshdkfkjsadfk h');
-
+const tabItems = [{
+    title: '首页',
+    icon: 'icon-ind',
+    path: '/home/index'
+  },
+  {
+    title: '地图',
+    icon: 'icon-findHouse',
+    path: '/home/map'
+  },
+  {
+    title: '音乐',
+    icon: 'icon-infom',
+    path: '/home/music'
+  },
+  {
+    title: '我的',
+    icon: 'icon-my',
+    path: '/home/detail'
+}]
 function Home() {
     return (
         <div className={style.wrap}>
@@ -19,9 +38,9 @@ function Home() {
             <Route exact path='/home/map' component={Mymap}></Route>
             <Route exact path='/home/music' component={Music}></Route>
             </div>
-            <div className={style.bottom}>
-                <MyTabbar>主页</MyTabbar>
-            </div>
+      
+            <MyTabbar tabs={tabItems}>主页</MyTabbar>
+          
         </div>
     )
 }

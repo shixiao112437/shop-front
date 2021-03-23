@@ -1,6 +1,7 @@
-.root {
+.root1 {
   height: 100%;
   background-color: #fff;
+  padding-top: 45px;
 }
 
 .navHeader {

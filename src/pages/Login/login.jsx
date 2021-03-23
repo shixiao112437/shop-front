@@ -8,12 +8,13 @@ import { withFormik,Form ,Field,ErrorMessage } from 'formik';
 // 导入yup --主要配合react  * as Yup 导入所有 并取一个 名字Yup
 import * as Yup from 'yup'
 import api from '../../api/index';
+import {connect} from 'react-redux';
 
 class Login extends Component {
  
   render() {
     return (
-      <div className={styles.root}>
+      <div className={styles.root1}>
         <MyNavBar>账号登录</MyNavBar>
         <WhiteSpace size="xl" />
 
@@ -69,9 +70,27 @@ class Login extends Component {
       </div>
     )
   }
- 
+  componentDidMount(){
+    console.log(this.state,'state');
+    console.log(this.props,'props');
+  }
 }
-export default withFormik({
+const mapstate = (state,ownProps) => {
+  return {
+    myDetail:state.userReduce
+  }
+}
+const mapReducer = (dispatch,ownProps) => {
+  return {
+    getMyDetail:(value) => {
+      dispatch({
+        type:"getInfo",
+        value
+      })
+    }
+  }
+}
+export default connect(mapstate,mapReducer)(withFormik({
   mapPropsToValues: () => {// state
      return { 
         account :'',
@@ -85,9 +104,12 @@ export default withFormik({
     if(res.code==0){
       localStorage.setItem("shop-token",res.data)
       Toast.success('登录成功啦~',1)
-      props.history.push('/')
+      let {data :myDetail } = await api.auth.getAuthInfo()
+      console.log(myDetail,'用户信息')
+      props.getMyDetail(myDetail)
+      props.history.push('/') 
     }else{//失败 提示
-        Toast.fail('登录失败啦~',2)
+        Toast.fail('登录失败啦~请重新登录',2)
     }
   },
   validationSchema:Yup.object().shape({
@@ -95,6 +117,6 @@ export default withFormik({
       password:Yup.string().required('密码必填！').matches(/^\w{5,20}$/,'密码   必须5-20位')
   })
  
-})(Login)
+})(Login))
 
  

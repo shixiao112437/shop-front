@@ -71,7 +71,7 @@ function Rigister() {
                 />
                 <hr /> */}
                     {/* <label htmlFor="account">账号：</label> */}
-                    <Field name="account" type="text" {...formik.getFieldProps('account')} />
+                    <Field  name="account" type="text" {...formik.getFieldProps('account')} />
                     <ErrorMessage name="account" className={rigister.errorMsg}  >
                         </ErrorMessage>
 

@@ -5,7 +5,7 @@ import MyNavBar from '../../component/MyNavBar/myNavBar'
 import List from 'react-virtualized/dist/commonjs/List'
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import api from '../../api/index';
-import './idnex.scss'
+import './index.scss'
 
 function PageIndex(props) {
     const listBox = useRef()
@@ -100,7 +100,7 @@ function PageIndex(props) {
                     )
                 }}
             </AutoSizer>
-            <ul style={{position:'fixed',right:0,width:'30'}}>
+            <ul className='list_city'>
             {
                 list.map((item,index) => {
                     return (

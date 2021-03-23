@@ -1,0 +1,16 @@
+$clolor: #11cee7;
+.contain{
+    color: $clolor;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    background-color: #11cee7;
+    a{
+        background-color: #fff;
+        padding: 10px;
+        width: 95%;
+        color: $clolor;
+    }
+}

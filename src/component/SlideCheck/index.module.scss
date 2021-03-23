@@ -1,0 +1,49 @@
+.top{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    span{
+        padding: 10px;
+        a{
+            cursor: pointer;
+        }
+    }
+}
+
+.cavas{
+    // background-color: red;
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding: 50px 0;
+    canvas{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+.tip{
+    padding: 10px 0;
+}
+.wrap{
+    background: #f7f9fa;
+    color: #45494c;
+    border: 1px solid #e4e7eb;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    position: relative;
+    span{
+        user-select: none;
+    }
+    .black{
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        top: 0;
+        
+        background-color: blue;
+    }
+}

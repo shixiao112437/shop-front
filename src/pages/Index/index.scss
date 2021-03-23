@@ -1,9 +1,8 @@
 .citywrap{
     height: 100%;
     background-color: #fff;
-    padding:20px 0px;
+    overflow: hidden;
     h1{
-    
         font-size: 20px;
         font-weight: 900;
         padding-left: 20px;
@@ -11,7 +10,7 @@
     .cityone{
         height: 30px;
         line-height: 30px;
-        border-bottom: 1px solid #ccc;
+        // border-bottom: 1px solid #ccc;
         padding-left: 20px;
     }
     .leftleter{
@@ -25,6 +24,12 @@
     .cityIndex{
         background-color: #108ee9;
         color: #fff;
+    }
+    .list_city{
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
     }
    
 }
