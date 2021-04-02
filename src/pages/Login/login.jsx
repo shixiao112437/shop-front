@@ -9,10 +9,12 @@ import { withFormik,Form ,Field,ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 import api from '../../api/index';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class Login extends Component {
  
   render() {
+    // console.log(this.props,'1223412312');
     return (
       <div className={styles.root1}>
         <MyNavBar>账号登录</MyNavBar>
@@ -67,6 +69,9 @@ class Login extends Component {
             </Flex.Item>
           </Flex>
         </WingBlank>
+        <button onClick={() => {
+          console.log(this.props)
+        }}></button>
       </div>
     )
   }
@@ -77,37 +82,69 @@ class Login extends Component {
 }
 const mapstate = (state,ownProps) => {
   return {
-    myDetail:state.userReduce
+    myDetail:state.userReduce,
+    aaaaaaaaa:state.tokenReduce
   }
 }
-const mapReducer = (dispatch,ownProps) => {
-  return {
-    getMyDetail:(value) => {
+let creatAction = (value) => {
+ 
+  return (dispatch) => {
+    setTimeout(() => {
       dispatch({
-        type:"getInfo",
+        type:'rrrrr',
+        value
+      })
+    })
+  }
+}
+
+
+const mapReducer = (dispatch,ownProps) => {
+
+  return {
+    getMyDetail:creatAction,
+    setMyDetail:(value)=>{
+      dispatch(() => {
+        return (dispatch) => {
+          setTimeout(_ => {
+            dispatch({
+              type:"setInfo",
+              value
+            })
+          },1000)
+        }
+      }())
+    },
+    settoken:(value) => {
+      dispatch({
+        type:'getToken',
         value
       })
     }
   }
 }
+
+
+
 export default connect(mapstate,mapReducer)(withFormik({
   mapPropsToValues: () => {// state
      return { 
-        account :'',
-        password:'' 
+        account :'shixiao',
+        password:'112437' 
       }
   },
   handleSubmit: async (values, { props }) => {
     console.log('数据在values',values) ;// {account: "123", password: "456"}
     let res=await api.auth.login(values)
-    console.log('登录结果',res)
+   
+    props.settoken(res.data)
     if(res.code==0){
       localStorage.setItem("shop-token",res.data)
       Toast.success('登录成功啦~',1)
       let {data :myDetail } = await api.auth.getAuthInfo()
       console.log(myDetail,'用户信息')
       props.getMyDetail(myDetail)
-      props.history.push('/') 
+      // props.history.push('/') 
     }else{//失败 提示
         Toast.fail('登录失败啦~请重新登录',2)
     }

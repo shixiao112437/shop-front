@@ -4,6 +4,7 @@ let state1 = {
     musicList:[],
     currentMusicId:"603b604fae5d472ea01830d4",
 }
+// reducer函数中 不能直接修改传过来的参数
 export default function musicReduce(state=state1,action){
     let musicList = state.musicList
     let currentMusicId = state.currentMusicId

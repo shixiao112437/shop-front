@@ -3,9 +3,10 @@ var state1 = {
 }
 export default function tokenReducer (state=state1,action)  {
     let {type,value} = action
+   console.log(action,'mmmmmmmmmmmmmm')
     if(type=='getToken'){
         return Object.assign({},state,{
-            ...value
+            token:value
         })
     }else{
         return state

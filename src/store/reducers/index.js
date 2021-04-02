@@ -4,8 +4,6 @@ import tokenReduce from './token_reduce'
 import musicReducer from './music_reducer'
 import userReduce from './user_reduce'
 
-
-
 const allReducer = combineReducers({
     tokenReduce,
     musicReducer,

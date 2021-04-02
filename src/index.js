@@ -5,9 +5,20 @@ import 'antd-mobile/dist/antd-mobile.css'
 import './index.css';
 
 import './assets/style/font/iconfont.css'
-import store from './store/index'
+import store from './store/reducers/index'
+
+// store订阅了数据的变化
+//  数据变化 重新渲染
+/* store.subscribe(() => {
+  ReactDOM.render(
+    <App  store={store}/>
+    , document.getElementById('root')
+  );
+}) */
+
 import {Provider} from 'react-redux'
 
+console.log(store,'storestorestorestorestore')
 ReactDOM.render(
   <Provider store={store}>
   <App />
