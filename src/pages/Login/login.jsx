@@ -80,48 +80,39 @@ class Login extends Component {
     console.log(this.props,'props');
   }
 }
+
+
 const mapstate = (state,ownProps) => {
   return {
     myDetail:state.userReduce,
     aaaaaaaaa:state.tokenReduce
   }
 }
-let creatAction = (value) => {
- 
+
+const delay = (value) => {
   return (dispatch) => {
     setTimeout(() => {
       dispatch({
-        type:'rrrrr',
+        type:"rrrrr",
         value
       })
     })
   }
 }
 
-
 const mapReducer = (dispatch,ownProps) => {
-
-  return {
-    getMyDetail:creatAction,
-    setMyDetail:(value)=>{
-      dispatch(() => {
-        return (dispatch) => {
-          setTimeout(_ => {
-            dispatch({
-              type:"setInfo",
-              value
-            })
-          },1000)
-        }
-      }())
-    },
-    settoken:(value) => {
+ return {
+   setToken: (value) => {
       dispatch({
-        type:'getToken',
+        type:"getToken",
         value
       })
-    }
-  }
+   },
+   asyncSetInfo: (value) => {
+     dispatch(delay(value))
+   }
+ }
+ 
 }
 
 
@@ -137,14 +128,14 @@ export default connect(mapstate,mapReducer)(withFormik({
     console.log('数据在values',values) ;// {account: "123", password: "456"}
     let res=await api.auth.login(values)
    
-    props.settoken(res.data)
+    props.setToken(res.data)
     if(res.code==0){
       localStorage.setItem("shop-token",res.data)
       Toast.success('登录成功啦~',1)
       let {data :myDetail } = await api.auth.getAuthInfo()
       console.log(myDetail,'用户信息')
-      props.getMyDetail(myDetail)
-      // props.history.push('/') 
+      props.asyncSetInfo(myDetail)
+      props.history.push('/') 
     }else{//失败 提示
         Toast.fail('登录失败啦~请重新登录',2)
     }
