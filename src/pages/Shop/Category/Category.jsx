@@ -61,7 +61,9 @@ export default class Category extends Component {
                         {
                             item.children && item.children.map(item1 => {
                                 return (
-                                    <div className={style.item} key={item1.cat_id}>
+                                    <div onClick={() => {
+                                        this.toDetail(item1)
+                                    }} className={style.item} key={item1.cat_id}>
                                         <img src={item1.cat_icon} />
                                         <span>{item1.cat_name}</span>
                                     </div>
@@ -85,8 +87,22 @@ export default class Category extends Component {
             this.contentRef.current.scrollTop = 0
         })
     }
+    // 分类页面跳转详情页
+    toDetail(item){
+        console.log(item);
+        this.props.history.push("/shop/list/"+item.cat_id)
+    /*     this.props.history.push({
+           path: "/shop/detail/",
+           query:{
+            catId:item.cat_id
+           }
+        }) */
+        
+        // alert(1)
+    }
 
     componentDidMount() {
         this.getCategoriesl()
     }
+    
 }

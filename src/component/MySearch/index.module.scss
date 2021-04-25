@@ -7,6 +7,11 @@ $clolor: #11cee7;
     align-items:center;
     justify-content:center;
     background-color: #11cee7;
+    // position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
     a{
         background-color: #fff;
         padding: 10px;

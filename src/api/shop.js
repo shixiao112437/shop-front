@@ -9,3 +9,10 @@ export  const getCategoriesl = () => {
         url:'/categories'
     })
 }
+
+export const getCatGoods = (params) => {
+    return request({
+        url:"/goods/search",
+        params
+    })
+}

@@ -1,0 +1,38 @@
+$clolor: #11cee7;
+
+.contain{
+    height: calc(100vh - 100px);
+    // background-color: red;
+    overflow: auto;
+    // display: flex;
+    // padding-top: 6px;
+}
+.goodItem{
+    // background-color: cyan;
+    display: flex;
+    justify-content: space-between;
+    height: 20vh;
+    border-bottom: 2px solid #ccc;
+    .leftImg{
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 80%;
+            height: 80%;
+        }
+    }
+    .rightContain{
+        flex: 3;
+        p{
+            padding: 10px;
+            line-height: 30px;
+
+        }
+        .price{
+            font-size: 20px;
+            color: $clolor;
+        }
+    }
+}

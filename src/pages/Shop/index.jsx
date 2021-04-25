@@ -4,6 +4,8 @@ import shop from './index.module.scss';
 import {Route} from 'react-router-dom'
 import ShopPage from './ShopPage/ShopPage';
 import Category from './Category/Category';
+import ShopList from './ShopList/ShopList';
+import ShopDetail from './ShopDetail/ShopDetail';
 
 
 
@@ -34,6 +36,9 @@ function Index() {
       <div className={shop.route}>
           <Route exact path='/shop/' component={ShopPage}></Route>
           <Route exact path='/shop/fl' component={Category}></Route>
+          <Route exact path='/shop/list/:catId' component={ShopList}></Route>
+          <Route exact path='/shop/detail/:goodId' component={ShopDetail}></Route>
+
       </div>
 
       <div className={shop.tarbar}>
