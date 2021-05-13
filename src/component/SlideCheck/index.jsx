@@ -44,7 +44,9 @@ class SlideCheck extends Component {
 
 
                 <div className={style.cavas}>
-                    <canvas ref={this.imgCavasRef}></canvas>
+                    <canvas ref={this.imgCavasRef}>
+                        
+                    </canvas>
                     <canvas style={{
                         left: this.state.diffX + 'px'
                     }} ref={this.miniCavasRef}></canvas>

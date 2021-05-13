@@ -1,4 +1,66 @@
 .contain{
     padding: 45px 0 50px;
-    background-color: #54fda2;
+    // background-color: #54fda2;
+    .CarouItem{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 176;
+
+    }
+    .itemGood{
+        padding: 20px;
+        .title{
+            text-align: center;
+        }
+        p{
+            line-height: 2em;
+        }
+    }
+    .butWrap{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        display: flex;
+        background-color: #fff;
+        // background-color: cyan;
+        height: 60px;
+        .call{
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            // border-left:1px solid #ccc;
+        }
+        .car{
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            border-left:.5px solid #ccc;
+
+        }
+        .addCar{
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: gold;
+            color: wheat;
+            border-left:1px solid #ccc;
+        }
+        .buy{
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(224, 58, 58);
+            color: wheat;
+            border-left:1px solid #ccc;
+        }
+    }
 }

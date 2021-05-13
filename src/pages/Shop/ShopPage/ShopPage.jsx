@@ -15,6 +15,9 @@ export default function ShopPage() {
     return (
         <div>
             <Mysearch></Mysearch>
+            <h1>
+                shhdskfksdhfkasdhfjk
+            </h1>
         </div>
     )
 }

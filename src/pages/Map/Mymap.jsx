@@ -57,6 +57,7 @@ export default function Mymap(props) {
        map.centerAndZoom(city+'市',12)
     }
     useEffect(()=>{
+        alert(1)
         renderMap();
         props.location.state&& centermap()
 

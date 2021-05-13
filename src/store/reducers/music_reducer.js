@@ -1,5 +1,3 @@
-import { object } from "prop-types"
-
 let state1 = {
     musicList:[],
     currentMusicId:"603b604fae5d472ea01830d4",

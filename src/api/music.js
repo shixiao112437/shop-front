@@ -5,3 +5,8 @@ export const getMusicList = () => {
         url:'/musiclist'
     })
 }
+export const getPic = () => {
+    return request({
+        url:"/test"
+    })
+}

@@ -18,12 +18,12 @@ export default function App() {
       <Route exact path='/' render={props =>　{
         return <Redirect to='/home'></Redirect>
       }} ></Route>  
-       <Route path="/home" component={Home}></Route>
+      <Route path="/home" component={Home}></Route>
       <Route exact path='/rigister' component={Rigister}></Route>
       <Route exact path='/login' component={Login}></Route>
-      <Route exact path='/music/musiclist' component={MusciList}></Route>
-      <Route exact path='/AAA' component={AAA}></Route>
-      <Route  path='/sports' component={Sports}></Route>
+      {/* <Route exact path='/music/musiclist' component={MusciList}></Route> */}
+      {/* <Route exact path='/AAA' component={AAA}></Route> */}
+      {/* <Route  path='/sports' component={Sports}></Route> */}
       <Route  path='/shop' component={Shop}></Route>
 
     </BrowserRouter>

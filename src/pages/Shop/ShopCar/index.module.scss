@@ -1,0 +1,32 @@
+.contain{
+    padding-top: 45px;
+    padding-bottom: 45px;
+   .shipment{
+       background-color: #fff;
+       color: black;
+       padding: 20px;
+       font-size: 16px;
+       margin-bottom: 10px;
+      .shipName{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px;
+      } 
+      .adress{
+
+      }
+   } 
+   .cartWrap{
+       background-color: #fff;
+       .title{
+            padding: 20px 25px;
+            border-bottom: 1px solid #ccc;
+       }
+       .goodItem{
+           padding: 15px  20px ;
+           border-bottom: 1px solid #ccc;
+
+       }
+
+   }
+}
