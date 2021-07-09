@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 import MyTabbar from '../../component/MyTabbar/MyTabbar'
 import style from './index.module.scss'
@@ -29,6 +29,13 @@ const tabItems = [{
     path: '/home/detail'
 }]
 function Home() {
+  useEffect(() => {
+    // window.addEventListener('scroll',function(){
+    //   console.log(1111);
+    // })
+    // console.log(props,'11111111111111');
+
+  }, [])
     return (
         <div className={style.wrap}>
             <div className={style.content}>

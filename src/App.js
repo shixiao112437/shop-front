@@ -7,8 +7,7 @@ import Rigister from './pages/Rigister/rigister'
 import AAA from './pages/Slide/index'
 import Sports from './pages/Sports/Sports.jsx'
 import Shop from './pages/Shop/index.jsx'
-
-
+import MusicCom from './pages/Music/Index/index'
 export default function App() {
 
   return (
@@ -25,6 +24,7 @@ export default function App() {
       {/* <Route exact path='/AAA' component={AAA}></Route> */}
       {/* <Route  path='/sports' component={Sports}></Route> */}
       <Route  path='/shop' component={Shop}></Route>
+      <Route exact path='/music/index' component={MusicCom}></Route>
 
     </BrowserRouter>
     </>

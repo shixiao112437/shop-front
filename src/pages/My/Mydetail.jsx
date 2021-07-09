@@ -5,6 +5,9 @@ import { Picker, ImagePicker, TextareaItem, DatePicker, List, Button, InputItem 
 import style from './index.module.scss'
 import api from '../../api';
 import {connect} from 'react-redux';
+import {debounce} from '../../utils/other.js';
+
+
 const BaseUrl = process.env.REACT_APP_URL
 const DefaultPhoto = BaseUrl + '/public/img/photo.jpg'
 
@@ -38,18 +41,32 @@ function Mydetail(props) {
   function success(){
     alert(1)
   }
+  const clg = (val) =>　{
+    console.log(val)
+    setNickname(val)
+  }
+  const delayFN = debounce(clg,1000)
   useEffect(() => {
-     
-    console.log(props,'11111111111111');
+    window.addEventListener('scroll',function(){
+      console.log(1111);
+    })
+    // console.log(props,'11111111111111');
+
   }, [])
   return (
-    <div className={style.mywrap}>
+    <div onScroll={()=>{
+      console.log(111111);
+    }} className={style.mywrap}>
       <MyNavBar>个人信息</MyNavBar>
       <div className={style.photo}>
         <img src={DefaultPhoto || ''} alt="" />
       </div>
       <List>
-        <InputItem onChange={val => setNickname(val)} placeholder='输入你的昵称'>
+        {/*  // console.log(val)
+            // setNickname(val) */}
+        <InputItem onChange={val =>{
+          delayFN(val)
+        } } placeholder='输入你的昵称'>
           昵称
         </InputItem>
         <InputItem onChange={val => setTel(val)} type='phone'>

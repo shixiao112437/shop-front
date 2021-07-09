@@ -237,7 +237,8 @@ function Music(props) {
                     <span className='iconfont icon-Augusta20yanchanghuixinxi'></span>
                     <span className='iconfont icon-wsdzb_zzgzt_zzsh_mzpy_dymzpyjl'></span>
                     <span onClick={() => {
-                        console.log(props)
+                        console.log(props);
+                        props.history.push('/music/index',123)
                     }} className='iconfont icon-gengduo'></span>
                 </div>
                 <div className={style.progress}>

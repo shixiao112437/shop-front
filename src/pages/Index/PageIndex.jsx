@@ -59,7 +59,6 @@ function PageIndex(props) {
     return (
         <div className='citywrap'>
             <MyNavBar>城市列表</MyNavBar>
-
             <AutoSizer>
                 {({height,width}) => {
                     return (
@@ -112,10 +111,7 @@ function PageIndex(props) {
                     )
                 })
             }
-            </ul>
-        
-
-          
+            </ul> 
         </div>
     )
 }
