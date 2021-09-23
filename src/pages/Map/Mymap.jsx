@@ -10,7 +10,6 @@ function SearchConroler(){
     this.defaultAnchor = window.BMAP_ANCHOR_TOP_LEFT
     this.defaultOffset = new BMapGL.Size(20,20)
 }
-
 SearchConroler.prototype = new BMapGL.Control()
 SearchConroler.prototype.initialize = function (map){
     var div = document.createElement('div')
@@ -57,7 +56,7 @@ export default function Mymap(props) {
        map.centerAndZoom(city+'市',12)
     }
     useEffect(()=>{
-        alert(1)
+     
         renderMap();
         props.location.state&& centermap()
 

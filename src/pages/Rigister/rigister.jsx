@@ -16,9 +16,9 @@ function Rigister() {
   let formRef = useRef()
     const formik = {
         initialValues: {
-            account: '',
-            password: '',
-            ischeck:''
+            account: 'wkf123',
+            password: 'wkf123',
+            ischeck:true,
         },
         validationSchema: Yup.object({
             account: Yup.string().required('账号必填！').matches(/^\w{5,8}$/, '用户名 必须5-8位'),
@@ -26,9 +26,9 @@ function Rigister() {
             ischeck: Yup.string().required('请勾选协议')
         }),
         onSubmit: async values => {
-            console.log(values, 'ssss')
-            alert(values)
-            register(values)
+            console.log(formik.initialValues, 'ssss')
+            alert(formik.initialValues)
+            register(formik.initialValues)
         },
     }
     async function register(values) {

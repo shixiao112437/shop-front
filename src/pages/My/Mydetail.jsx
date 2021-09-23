@@ -1,12 +1,11 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import MyNavBar from '../../component/MyNavBar/myNavBar'
 import SlideCheck from '../../component/SlideCheck/index'
 import { Picker, ImagePicker, TextareaItem, DatePicker, List, Button, InputItem } from 'antd-mobile';
 import style from './index.module.scss'
 import api from '../../api';
-import {connect} from 'react-redux';
-import {debounce} from '../../utils/other.js';
-
+import { connect } from 'react-redux';
+import { debounce } from '../../utils/other.js';
 
 const BaseUrl = process.env.REACT_APP_URL
 const DefaultPhoto = BaseUrl + '/public/img/photo.jpg'
@@ -21,7 +20,7 @@ function Mydetail(props) {
   }]
   const [nickname, setNickname] = useState(props.myDetail.nickname) // 昵称
   const [tel, setTel] = useState(props.myDetail.tel) // 昵称
-  const [gender, setGender] = useState(props.myDetail.gender)
+  const [gender, setGender] = useState([props.myDetail.gender])
   const [age, setAge] = useState(props.myDetail.age)
   const [birth, setBirth] = useState(new Date())
   const [brief, setBrief] = useState(props.myDetail.brief)
@@ -38,23 +37,37 @@ function Mydetail(props) {
     let res = await api.auth.saveinfo(params)
     console.log(res);
   }
-  function success(){
+  function success() {
     alert(1)
   }
-  const clg = (val) =>　{
+  const clg = (val) => {
     console.log(val)
     setNickname(val)
   }
-  const delayFN = debounce(clg,1000)
+  // 获取用户信息
+  const getINfo = () => {
+    console.log(props, '11111111111111');
+
+    let { nickname, age, gender, tel, birth, brief } = props.myDetail
+    setNickname(nickname)
+    setTel(tel)
+    setGender([gender])
+    setAge(age)
+    setBirth(birth)
+    setBrief(brief)
+  }
+  const delayFN = debounce(clg, 1000)
+/*   const delayFN = debounce(clg, 1000)
   useEffect(() => {
-    window.addEventListener('scroll',function(){
+    window.addEventListener('scroll', function () {
       console.log(1111);
     })
-    // console.log(props,'11111111111111');
+    // getINfo()
 
   }, [])
+ */
   return (
-    <div onScroll={()=>{
+    <div onScroll={() => {
       console.log(111111);
     }} className={style.mywrap}>
       <MyNavBar>个人信息</MyNavBar>
@@ -64,12 +77,12 @@ function Mydetail(props) {
       <List>
         {/*  // console.log(val)
             // setNickname(val) */}
-        <InputItem onChange={val =>{
-          delayFN(val)
-        } } placeholder='输入你的昵称'>
+        <InputItem value={nickname} onChange={val => {
+        setNickname(val)
+        }} placeholder='输入你的昵称'>
           昵称
         </InputItem>
-        <InputItem onChange={val => setTel(val)} type='phone'>
+        <InputItem  value={tel} onChange={val => setTel(val)} type='phone'>
           手机号
         </InputItem>
         <Picker
@@ -81,20 +94,21 @@ function Mydetail(props) {
         >
           <List.Item arrow="horizontal">性别</List.Item>
         </Picker>
-        <InputItem onChange={val => setAge(val)} maxLength={3} type='digit'>
+        <InputItem value={age} onChange={val => setAge(val)} maxLength={3} type='digit'>
           年龄
         </InputItem>
-        <DatePicker mode='date'
+        {/* <DatePicker mode='date'
           value={birth}
           onOk={(val) => {
             setBirth(val)
             console.log(val)
           }}>
           <List.Item arrow="horizontal">生日</List.Item>
-        </DatePicker>
+        </DatePicker> */}
       </List>
       <List>
         <TextareaItem
+        value={brief}
           onChange={val => setBrief(val)}
           rows={3}
           placeholder="这个人很懒还没有什么说的..."
@@ -113,25 +127,25 @@ function Mydetail(props) {
         </ImagePicker>
       <Button type='primary' onClick={() => {
 
-        props.history.push('/shop')
+       getINfo()
       }}>跳转shop页面</Button>
 
       <Button type='primary' onClick={() => {
-          setModal(true)
-          setTimeout(() => {
-            setModal(false)
-          },0);
+        setModal(true)
+        setTimeout(() => {
+          setModal(false)
+        }, 0);
       }}>打开验证码</Button>
       <SlideCheck modal={modal} success={success}></SlideCheck>
 
     </div>
   )
 }
-const mapstate = (state,ownProps) => {
-  
+const mapstate = (state, ownProps) => {
+
   return {
-    myDetail:state.userReduce,
-    a:ownProps
+    myDetail: state.userReduce,
+    a: ownProps
   }
 }
 export default connect(mapstate)(Mydetail)

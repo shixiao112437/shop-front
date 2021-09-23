@@ -68,7 +68,7 @@ function MuciList(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        musicList: state.reduce.musicList
+        musicList: state.musicReducer.musicList
     }
 }
 

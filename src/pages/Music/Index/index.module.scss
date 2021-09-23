@@ -48,15 +48,18 @@
             }
         }
         .content{
-            // overflow-x: scroll;
-            overflow: hidden;
+            // overflow: hidden;
             // display: flex;
             width: 100vw;
+            overflow: auto;
+            margin-bottom: 20px;
+
             ul{
+                background-color: #ccc;
+                padding: 10px 0;
                 display: flex;
                 height: 130px;
-                overflow-x: scroll;
-                overflow-y: hidden;
+                width: 1000px;
                 .recomItem{
                     flex: 0 0 100px;
                     // width: 150px;

@@ -25,6 +25,18 @@ function userReduce(state=info,action){
           ...state,
           ...value
       }
+    }else if(type=='setUser'){
+        console.error(value,'skdjfakljfklsjdkl')
+        sessionStorage.setItem('userInfo',JSON.stringify(value) )
+        return {
+            ...state,
+            age:value.age,
+            birth:value.birth,
+            brief:value.brief,
+            gender:value.gender,
+            nickname:value.nickname,
+            tel:value.tel,
+        }
     }else{
         return  state
     }
