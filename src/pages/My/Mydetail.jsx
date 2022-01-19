@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef  } from 'react'
 import MyNavBar from '../../component/MyNavBar/myNavBar'
 import SlideCheck from '../../component/SlideCheck/index'
 import { Picker, ImagePicker, TextareaItem, DatePicker, List, Button, InputItem } from 'antd-mobile';
@@ -11,6 +11,7 @@ const BaseUrl = process.env.REACT_APP_URL
 const DefaultPhoto = BaseUrl + '/public/img/photo.jpg'
 
 function Mydetail(props) {
+  const imgUpRef = useRef()
   const ageList = [{
     label: '男',
     value: 1
@@ -28,7 +29,7 @@ function Mydetail(props) {
   const [modal, setModal] = useState(false)
   function changefile(files) {
     setFiles(files)
-    console.log(files, '123123');
+
   }
   async function submit() {
     let params = {
@@ -46,8 +47,6 @@ function Mydetail(props) {
   }
   // 获取用户信息
   const getINfo = () => {
-    console.log(props, '11111111111111');
-
     let { nickname, age, gender, tel, birth, brief } = props.myDetail
     setNickname(nickname)
     setTel(tel)
@@ -73,7 +72,25 @@ function Mydetail(props) {
       <MyNavBar>个人信息</MyNavBar>
       <div className={style.photo}>
         <img src={DefaultPhoto || ''} alt="" />
+        <div  onClick={()=>{
+           imgUpRef.current.removeImage(0)
+         
+        }} className={style.uploadImg}>
+        <ImagePicker
+        ref={imgUpRef}
+        files={files}
+        length={'1'}
+        multiple={false}
+        onChange={changefile}
+        onImageClick={(index, fs) => {
+          console.log(imgUpRef.current)
+          // imgUpRef.current.click()
+        }}
+        selectable={files.length < 1}
+      ></ImagePicker>
+        </div>
       </div>
+  
       <List>
         {/*  // console.log(val)
             // setNickname(val) */}
@@ -117,14 +134,7 @@ function Mydetail(props) {
         </TextareaItem>
       </List>
       <Button type='primary' onClick={submit}>提交</Button>
-      <ImagePicker
-        files={files}
-        onChange={changefile}
-        onImageClick={(index, fs) => console.log(index, fs)}
-        selectable={files.length < 7}
-      >
-        是是是
-        </ImagePicker>
+  
       <Button type='primary' onClick={() => {
 
        getINfo()

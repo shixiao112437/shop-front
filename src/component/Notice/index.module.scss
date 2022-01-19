@@ -1,0 +1,50 @@
+.wrap{
+    width: 1000px;
+    margin: 200px auto 0;
+    height: 80px;
+    background-color: #ccc;
+    // padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+
+
+    ul{
+        position: absolute;
+        display: flex;
+        background-color: #fff;
+        animation-name: move1;
+        animation-duration: 10s;
+        /* 设置无限循环 */
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        li{
+            flex: 0 0 1000px;
+            float: left;
+            height: 80px;
+            line-height: 80px;
+            background-color: rgb(72, 72, 177);
+            color: #fff;
+            opacity: 0.6;
+            animation-name: move1;
+            animation-duration: 1s;
+            /* 设置无限循环 */
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            // margin-right: 20px;
+        }
+        // li:hover{
+        //         cursor: pointer;
+        //         animation-play-state: paused ;
+        // }
+    }
+}
+
+@keyframes move{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-5900);
+    }
+}
+

@@ -8,6 +8,9 @@ import Sports from './pages/Sports/Sports.jsx'
 import Shop from './pages/Shop/index.jsx'
 import MusicCom from './pages/Music/Index/index'
 import Chat from './pages/Chat/Chat.jsx'
+import Swiper from './pages/Swiper/Swiper.jsx'
+import ImageCutHome from './pages/ImageCutHome/ImageCutHome.jsx'
+
 export default function App() {
 
   return (
@@ -24,7 +27,9 @@ export default function App() {
       {/* <Route exact path='/AAA' component={AAA}></Route> */}
       <Route  path='/sports' component={Sports}></Route>
       <Route  path='/shop' component={Shop}></Route>
+      <Route  path='/ImageCutHome' component={ImageCutHome}></Route>
       <Route exact path='/music/index' component={MusicCom}></Route>
+      <Route exact path='/swiper' component={Swiper}></Route>
 
     </BrowserRouter>
     </>
